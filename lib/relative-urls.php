@@ -8,12 +8,15 @@
  * You can enable/disable this feature in config.php:
  * current_theme_supports('root-relative-urls');
  *
+ * When using a CDN mapped to your domain, define REL_URL_CDN in config.php to avoid the preg_match.
+ * define('REL_URL_CDN', 'content.yourserver.tld');
+ *
  * @author Scott Walkinshaw <scott.walkinshaw@gmail.com>
  */
 function roots_root_relative_url($input) {
   $server_name = $_SERVER['SERVER_NAME'];
 
-  if (strpos($input, $server_name) === false) {
+  if (strpos($input, $server_name) === false || strpos($input, REL_URL_CDN)) {
     return $input;
   }
 
