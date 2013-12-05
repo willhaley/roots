@@ -87,34 +87,42 @@ module.exports = function (grunt) {
             functions: {
                 options: {
                     urls: [ 'http://localhost:8000/functions.html' ],
-                    page : {
-                        viewportSize : { width: 300, height: 400 }
+                    page: {
+                        viewportSize: { width: 300, height: 400 }
                     }
                 }
             },
             resizeSmall: {
                 options: {
                     urls: [ 'http://localhost:8000/resize.html' ],
-                    page : {
-                        viewportSize : { width: 300, height: 400 }
+                    page: {
+                        viewportSize: { width: 300, height: 400 }
                     }
                 }
             },
             resizeMedium: {
                 options: {
                     urls: [ 'http://localhost:8000/resize.html' ],
-                    page : {
-                        viewportSize : { width: 700, height: 400 }
+                    page: {
+                        viewportSize: { width: 700, height: 400 }
                     }
                 }
             },
             resizeLarge: {
                 options: {
                     urls: [ 'http://localhost:8000/resize.html' ],
-                    page : {
-                        viewportSize : { width: 1000, height: 400 }
+                    page: {
+                        viewportSize: { width: 1000, height: 400 }
                     }
                 }
+            }
+        },
+        sass: {
+            options: {
+                style: 'expanded'
+            },
+            files: {
+                'asssets/css/main.min.css':'assets/style.scss'
             }
         }
     });
@@ -124,13 +132,14 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-watch');
-    grunt.loadNpmTasks('grunt-contrib-less');
+    grunt.loadNpmTasks('grunt-contrib-sass');
     grunt.loadNpmTasks('grunt-wp-version');
 
     // Register tasks
     grunt.registerTask('default', [
         'jshint',
         'copy',
+        'sass',
         'sass:test',
         'connect',
         'qunit'
